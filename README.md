@@ -24,7 +24,7 @@ Then open the address it prints (usually `http://localhost:5173`).
 | `npm run dev` | Local site with live reload. Placeholders are labelled with the file they want. |
 | `npm run build` | Optimises images, type-checks and builds to `dist/`. |
 | `npm run preview` | Serves the built site locally. |
-| `npm run screenshots` | Captures the intro sequence and every page at 390×844 and 1440×900 (needs the dev server running). |
+| `npm run screenshots` | Captures the intro sequence and every page at 390×844 and 1440×900 into `screenshots/` (needs the dev server running). |
 | `node scripts/contrast.mjs` | Checks every text and background pairing against WCAG AA. |
 
 ## Three things you will want to do
