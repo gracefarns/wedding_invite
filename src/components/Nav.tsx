@@ -41,8 +41,9 @@ export function Nav() {
     <>
       <header className={`nav${hidden ? ' is-hidden' : ''}${open ? ' is-open' : ''}`}>
         <div className="nav__inner">
-          <TLink to="/" className="nav__mark" aria-label={`${names}, home`}>
+          <TLink to="/" className="nav__mark">
             <Monogram />
+            <span className="sr-only">{names}, home</span>
           </TLink>
           <nav className="nav__links" aria-label="Primary">
             {site.nav.map((item) => (

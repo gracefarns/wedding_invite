@@ -151,11 +151,11 @@ export function Intro({ onReveal, onDone, onSkip }: Props) {
           <span className="sr-only">Open the invitation</span>
           <span className="suite__breath" aria-hidden="true">
             <span className="suite__card">
-              <ArtImage slot="embossedCard" quiet priority sizes="(min-width: 640px) 360px, 72vw" />
+              <ArtImage slot="embossedCard" quiet priority sizes="(min-width: 640px) 400px, 70vw" />
             </span>
             <span className="suite__oval-shadow" />
             <span className="suite__oval">
-              <ArtImage slot="ovalDetailsCard" quiet priority sizes="(min-width: 640px) 480px, 100vw" />
+              <ArtImage slot="ovalDetailsCard" quiet priority sizes="(min-width: 640px) 280px, 48vw" />
               <span className="suite__text">
                 <span className="suite__kicker">{site.intro.cardKicker}</span>
                 <span className="suite__names">

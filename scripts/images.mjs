@@ -20,9 +20,9 @@ const SRC = join(ROOT, 'public/images')
 const GEN = join(SRC, '_gen')
 const OUT = join(ROOT, 'src/content/images.generated.json')
 const CACHE = join(GEN, 'cache.json')
-const VERSION = 3
+const VERSION = 4
 
-const WIDTHS = [480, 960, 1600, 2400]
+const WIDTHS = [320, 480, 640, 960, 1280, 1600, 2400]
 const RASTER = new Set(['.jpg', '.jpeg', '.png', '.webp', '.avif'])
 const OTHER = new Set(['.webm', '.mp4', '.svg', '.gif'])
 

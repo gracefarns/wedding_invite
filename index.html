@@ -20,12 +20,27 @@
       /* Painted before any script runs, so the first frame is always paper, never white. */
       html { background: #EDE7DB; color: #4A4A3A; }
       body { margin: 0; }
-      #boot { position: fixed; inset: 0; display: grid; place-items: center; background: #EDE7DB; }
-      #boot i { display: block; width: 72px; height: 1px; background: rgba(155, 152, 121, 0.45); }
+      #boot { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1rem; background-color: #EDE7DB; }
+      #boot .loader__mark { opacity: 0; }
+      #boot .loader__mark.is-ready { opacity: 1; }
+      #boot .loader__track { display: block; width: 7rem; height: 1px; background: rgba(155, 152, 121, 0.3); }
     </style>
   </head>
   <body>
-    <div id="root"><div id="boot" aria-hidden="true"><i></i></div></div>
+    <div id="root">
+      <!-- The loader, as plain HTML: it paints as soon as the stylesheet and script font arrive,
+           without waiting for the app. React renders the same markup in its place. -->
+      <div class="loader paper" id="boot" aria-hidden="true">
+        <span class="monogram loader__mark"><span>__INITIAL_A__</span><span class="monogram__amp">__JOINER__</span><span>__INITIAL_B__</span></span>
+        <span class="loader__track"><span class="loader__bar" style="transform: scaleX(0)"></span></span>
+      </div>
+    </div>
+    <script>
+      document.fonts.load('3.4rem "Monsieur La Doulaise"').then(function (faces) {
+        var mark = document.querySelector('#boot .loader__mark')
+        if (mark && faces.length) mark.classList.add('is-ready')
+      })
+    </script>
     <noscript>
       <p style="font-family: Georgia, serif; text-align: center; padding: 4rem 1.5rem; line-height: 1.7">
         __DESCRIPTION__<br />

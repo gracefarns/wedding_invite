@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { type GalleryItem } from '../content/gallery'
 import { useFocusTrap } from '../lib/hooks'
 import { raster } from '../lib/images'
@@ -36,7 +37,8 @@ export function Lightbox({ items, index, onChange, onClose }: Props) {
   const real = raster(item.file)
   const [w, h] = real ? [real.w, real.h] : item.ratio
 
-  return (
+  // Rendered at the end of <body>, so nothing in the page can size or clip it.
+  return createPortal(
     <div
       ref={root}
       className="lightbox paper"
@@ -74,6 +76,7 @@ export function Lightbox({ items, index, onChange, onClose }: Props) {
           Next
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
