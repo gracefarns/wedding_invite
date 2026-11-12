@@ -1,0 +1,355 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--eggshell);
+  scrollbar-gutter: stable;
+}
+html.is-locked,
+html.is-locked body {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.045em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Paper: eggshell with the grain texture multiplied in at low strength. */
+  background-color: var(--eggshell);
+  background-image: linear-gradient(rgb(var(--eggshell-rgb) / 0.45), rgb(var(--eggshell-rgb) / 0.45)), var(--grain);
+  background-size: auto, var(--grain-size);
+  background-blend-mode: normal, multiply;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+ol,
+ul {
+  list-style: none;
+}
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Focus: an olive ring, with a hairline of ink so it holds 3:1 against paper. */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 1px var(--ink);
+  border-radius: 2px;
+}
+
+::selection {
+  background: rgb(var(--olive-rgb) / 0.35);
+  color: var(--ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  left: 50%;
+  top: 0.75rem;
+  z-index: 400;
+  transform: translate(-50%, -300%);
+  padding: 0.6rem 1.2rem;
+  background: var(--ink);
+  color: var(--eggshell);
+  font-size: 0.6875rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+}
+
+/* ── Type ─────────────────────────────────────────────────────────────── */
+
+.caps {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.6875rem;
+  line-height: 1.9;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  /* optical: tracked caps carry trailing space, nudge them back to centre */
+  margin-right: -0.3em;
+}
+.caps--lg {
+  font-size: 0.75rem;
+}
+
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--moss);
+  /* the flourishes reach well beyond the em box */
+  padding: 0.18em 0.12em 0.22em;
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+}
+.serif--it {
+  font-style: italic;
+}
+.serif--caps {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.rule {
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  margin: 0 auto;
+  border: 0;
+  background: var(--olive);
+}
+.rule--wide {
+  width: 100%;
+  background: rgb(var(--olive-rgb) / 0.45);
+}
+
+.muted {
+  color: rgb(var(--ink-rgb) / 0.86);
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────── */
+
+.col {
+  width: min(100% - 2 * var(--gutter), var(--col));
+  margin-inline: auto;
+}
+.center {
+  text-align: center;
+}
+.section {
+  padding-block: clamp(4rem, 14vw, 6.5rem);
+}
+.stack > * + * {
+  margin-top: var(--gap, 1.25rem);
+}
+
+/* ── Paper surfaces ───────────────────────────────────────────────────── */
+
+.paper {
+  --paper: var(--eggshell-rgb);
+  background-color: rgb(var(--paper));
+  background-image: linear-gradient(rgb(var(--paper) / 0.35), rgb(var(--paper) / 0.35)), var(--grain);
+  background-size: auto, var(--grain-size);
+  background-blend-mode: normal, multiply;
+}
+.paper--linen {
+  --paper: var(--linen-rgb);
+}
+.paper--olive {
+  --paper: var(--olive-rgb);
+}
+.paper--moss {
+  --paper: var(--moss-rgb);
+}
+
+/* ── Buttons and links ────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.5rem 2.6rem 0.5rem 2.9rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--eggshell);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: background-color 600ms var(--ease-out), opacity 600ms var(--ease-out);
+}
+.btn:hover {
+  background: var(--mahogany);
+}
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: default;
+}
+.btn--wide {
+  width: 100%;
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--olive);
+}
+.btn--ghost:hover {
+  background: rgb(var(--linen-rgb) / 0.6);
+}
+
+.link-caps {
+  position: relative;
+  display: inline-block;
+  padding: 0.35rem 0 0.45rem;
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  transition: color 600ms var(--ease-out);
+}
+.link-caps::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0.3em;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transition: transform 700ms var(--ease-out);
+}
+.link-caps:hover {
+  color: var(--mahogany);
+}
+.link-caps:hover::after {
+  transform: scaleX(0.6);
+}
+
+.link-text {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  text-decoration-color: var(--olive);
+  transition: color 500ms var(--ease-out);
+}
+.link-text:hover {
+  color: var(--mahogany);
+}
+
+/* ── Scroll reveals ───────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 1.75rem, 0);
+  transition: opacity 1400ms var(--ease-out), transform 1600ms var(--ease-out), clip-path 1800ms var(--ease-in-out),
+    filter 1400ms var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+.reveal--fade {
+  transform: none;
+}
+.reveal--soft {
+  filter: blur(6px);
+}
+.reveal--soft.is-in {
+  filter: none;
+}
+/* left-to-right wipe, with room for script flourishes outside the box */
+.reveal--wipe {
+  display: inline-block;
+  opacity: 1;
+  transform: none;
+  clip-path: inset(-40% 100% -40% -8%);
+}
+.reveal--wipe.is-in {
+  clip-path: inset(-40% -8% -40% -8%);
+}
+
+/* ── Idle sway for floral cutouts ─────────────────────────────────────── */
+
+.sway {
+  animation: sway var(--sway-dur, 8s) var(--ease-in-out) var(--sway-delay, 0s) infinite alternate;
+  transform-origin: var(--sway-origin, 50% 100%);
+}
+@keyframes sway {
+  from {
+    transform: rotate(calc(var(--sway-amt, 0.8deg) * -1));
+  }
+  to {
+    transform: rotate(var(--sway-amt, 0.8deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--wipe,
+  .reveal--soft {
+    transform: none;
+    clip-path: none;
+    filter: none;
+    transition: opacity 600ms ease;
+  }
+  .sway {
+    animation: none;
+  }
+}

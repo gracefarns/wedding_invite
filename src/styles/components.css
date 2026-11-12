@@ -1,0 +1,474 @@
+/* ── ArtImage ─────────────────────────────────────────────────────────── */
+
+.art {
+  position: relative;
+  display: block;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.art--fill {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+}
+.art picture,
+.art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.art img {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.art.is-loaded img {
+  opacity: 1;
+}
+.art--photo {
+  overflow: hidden;
+}
+
+/* Placeholder: a quiet block of paper in the right proportions. */
+.art--missing {
+  --tone: var(--linen-rgb);
+  --label: var(--ink);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: rgb(var(--tone));
+  background-image: linear-gradient(rgb(var(--tone) / 0.3), rgb(var(--tone) / 0.3)), var(--grain);
+  background-size: auto, var(--grain-size);
+  background-blend-mode: normal, multiply;
+  box-shadow: inset 0 0 0 1px rgb(var(--ink-rgb) / 0.07);
+}
+.art--tone-eggshell {
+  --tone: 243 238 228;
+}
+.art--tone-olive {
+  --tone: var(--olive-rgb);
+}
+.art--tone-moss {
+  --tone: var(--moss-rgb);
+  --label: var(--eggshell);
+}
+.art--shape-oval {
+  border-radius: 50%;
+}
+.art--shape-arch {
+  border-radius: 999px 999px 0 0;
+}
+.art--shape-flap {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.art--shape-ring {
+  border-radius: 50%;
+}
+/* decorative accents that vanish on the live site: outline only, so they never read as a block */
+.art--ghost {
+  background: none;
+  box-shadow: inset 0 0 0 1px rgb(var(--olive-rgb) / 0.55);
+}
+.art__label {
+  max-width: 86%;
+  padding: 0.25em;
+  color: var(--label);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.5625rem;
+  line-height: 1.7;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-align: center;
+  overflow-wrap: anywhere;
+  opacity: 0.82;
+}
+.art__label--top {
+  align-self: start;
+  margin-top: 1.5rem;
+}
+.art__label--bottom {
+  align-self: end;
+  margin-bottom: 1.5rem;
+}
+.art--ghost .art__label {
+  color: var(--ink);
+}
+
+/* ── Monogram ─────────────────────────────────────────────────────────── */
+
+.monogram {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--font-script);
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  padding: 0.3em 0.15em 0.2em;
+}
+.monogram__amp {
+  font-size: 0.62em;
+  margin: 0 0.12em 0 0.2em;
+  transform: translateY(-0.08em);
+}
+
+/* ── Loader ───────────────────────────────────────────────────────────── */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  transition: opacity 800ms var(--ease-in-out), visibility 0s linear 800ms;
+}
+.loader.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader__mark {
+  font-size: 3.4rem;
+  color: var(--moss);
+  opacity: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 900ms var(--ease-out), transform 1200ms var(--ease-out);
+}
+.loader__mark.is-ready {
+  opacity: 1;
+  transform: none;
+}
+.loader__track {
+  position: relative;
+  width: 7rem;
+  height: 1px;
+  background: rgb(var(--olive-rgb) / 0.3);
+  overflow: hidden;
+}
+.loader__bar {
+  position: absolute;
+  inset: 0;
+  background: var(--moss);
+  transform-origin: left;
+  transition: transform 700ms var(--ease-out);
+}
+
+/* ── Paper veil (page transitions) ────────────────────────────────────── */
+
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 300ms var(--ease-in-out), visibility 0s linear 300ms;
+}
+.veil.is-on {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 300ms var(--ease-in-out);
+}
+
+/* ── Navigation ───────────────────────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background-color: rgb(var(--eggshell-rgb) / 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgb(var(--olive-rgb) / 0.28);
+  transition: opacity 900ms var(--ease-out), transform 1100ms var(--ease-out), visibility 0s;
+}
+.nav.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.75rem);
+  pointer-events: none;
+  transition: opacity 600ms var(--ease-out), transform 800ms var(--ease-out), visibility 0s linear 600ms;
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.nav__mark {
+  display: inline-flex;
+  color: var(--moss);
+  transition: color 600ms var(--ease-out);
+}
+.nav__mark:hover {
+  color: var(--mahogany);
+}
+.nav__mark .monogram {
+  font-size: 1.9rem;
+}
+.nav__links {
+  display: none;
+  gap: clamp(1.1rem, 2.2vw, 2.4rem);
+}
+.nav__link {
+  position: relative;
+  padding: 0.6rem 0;
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink);
+}
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0.26em;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--olive);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 700ms var(--ease-out);
+}
+.nav__link:hover::after,
+.nav__link[aria-current='page']::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.nav__toggle {
+  padding: 0.75rem 0 0.75rem 1rem;
+}
+@media (min-width: 64rem) {
+  .nav__links {
+    display: flex;
+  }
+  .nav__toggle {
+    display: none;
+  }
+}
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem var(--gutter) 3rem;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 600ms var(--ease-in-out), visibility 0s linear 600ms;
+}
+.menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 600ms var(--ease-in-out);
+}
+.menu__close {
+  position: absolute;
+  top: 0;
+  right: var(--gutter);
+  height: var(--nav-h);
+  padding-left: 1rem;
+}
+.menu__list {
+  display: grid;
+  gap: 0.35rem;
+  text-align: center;
+}
+.menu__list li,
+.menu__date {
+  opacity: 0;
+  transform: translateY(1rem);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+.menu.is-open .menu__list li,
+.menu.is-open .menu__date {
+  opacity: 1;
+  transform: none;
+  transition: opacity 900ms var(--ease-out), transform 1100ms var(--ease-out);
+  transition-delay: calc(180ms + var(--i) * 70ms);
+}
+.menu__link {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  font-size: clamp(1.7rem, 7.4vw, 2.2rem);
+  font-weight: 300;
+  color: var(--ink);
+  transition: color 500ms var(--ease-out);
+}
+.menu__link:hover,
+.menu__link[aria-current='page'] {
+  font-style: italic;
+  color: var(--moss);
+}
+.menu__date {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.2rem;
+  text-align: center;
+}
+.menu__floral {
+  position: absolute;
+  right: -14%;
+  bottom: -6%;
+  width: min(68vw, 20rem);
+  pointer-events: none;
+  --sway-origin: 100% 100%;
+}
+@media (min-width: 64rem) {
+  .menu {
+    display: none;
+  }
+}
+
+/* ── Page header ──────────────────────────────────────────────────────── */
+
+.page {
+  padding-top: var(--nav-h);
+  overflow-x: clip;
+}
+.page-header {
+  padding-top: clamp(3.5rem, 13vw, 6rem);
+  padding-bottom: clamp(2.5rem, 9vw, 4rem);
+}
+.page-header__kicker {
+  margin-bottom: 1rem;
+}
+.page-header__title {
+  font-size: clamp(3.3rem, 15.5vw, 5.25rem);
+  margin-bottom: 0.6rem;
+  white-space: nowrap;
+}
+.page-header__intro {
+  margin-top: 1.9rem;
+  text-wrap: balance;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+
+.footer {
+  position: relative;
+  padding: clamp(3.5rem, 12vw, 5.5rem) 0 clamp(3rem, 10vw, 4.5rem);
+  border-top: 1px solid rgb(var(--olive-rgb) / 0.35);
+}
+.footer__inner > * + * {
+  margin-top: 0.5rem;
+}
+.footer__mark {
+  font-size: 3.4rem;
+  color: var(--moss);
+}
+.footer__venue {
+  margin-top: 0.1rem;
+}
+.footer__rule {
+  margin-top: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.footer__note {
+  margin-top: 2.6rem;
+  font-size: 0.625rem;
+}
+/* one of the few places mahogany appears */
+.footer__signature {
+  margin-top: 0;
+  font-size: 3rem;
+  color: var(--mahogany);
+}
+
+/* ── Mats: photographs set into paper ─────────────────────────────────── */
+
+.mat {
+  position: relative;
+  padding: clamp(0.7rem, 3.4vw, 1.1rem);
+  box-shadow: var(--shadow-paper);
+}
+.mat::after {
+  /* a thin debossed line around the window */
+  content: '';
+  position: absolute;
+  inset: clamp(0.4rem, 2vw, 0.65rem);
+  border: 1px solid rgb(var(--olive-rgb) / 0.35);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.mat .art {
+  box-shadow: inset 0 1px 3px rgb(var(--ink-rgb) / 0.25);
+}
+.mat--arch,
+.mat--arch .art {
+  border-radius: 999px 999px 2px 2px;
+}
+.mat--oval,
+.mat--oval .art {
+  border-radius: 50%;
+}
+.mat--oval {
+  padding: clamp(0.9rem, 4vw, 1.4rem);
+}
+.mat--oval::after {
+  inset: clamp(0.5rem, 2.4vw, 0.8rem);
+}
+.mat .art--missing.art--shape-rect {
+  border-radius: inherit;
+}
+
+/* ── Stationery card (image-backed) ───────────────────────────────────── */
+
+.stationery {
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+.stationery__paper {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  filter: drop-shadow(0 1px 1px rgb(var(--ink-rgb) / 0.1)) drop-shadow(0 5px 9px rgb(var(--ink-rgb) / 0.09))
+    drop-shadow(0 16px 26px rgb(var(--ink-rgb) / 0.09));
+  transition: filter 900ms var(--ease-out);
+}
+.stationery__paper .art,
+.stationery__paper .art img {
+  width: 100%;
+  height: 100%;
+}
+.stationery__paper .art img {
+  object-fit: fill !important;
+}
+.stationery__tab {
+  position: absolute;
+  top: -0.9rem;
+  left: 50%;
+  width: 1.35rem;
+  transform: translateX(-50%) rotate(var(--tab-tilt, -3deg));
+  filter: drop-shadow(0 2px 3px rgb(var(--ink-rgb) / 0.22));
+  transition: transform 900ms var(--ease-out);
+  transform-origin: 50% 0;
+}
+a.stationery:hover .stationery__tab {
+  transform: translateX(-50%) rotate(calc(var(--tab-tilt, -3deg) + 5deg));
+}
+a.stationery {
+  transition: transform 900ms var(--ease-out);
+}
+a.stationery:hover {
+  transform: translateY(-3px);
+}

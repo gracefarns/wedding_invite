@@ -1,0 +1,328 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  color: var(--ink);
+}
+.intro__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--linen);
+  animation: intro-arrive 1600ms var(--ease-out) both;
+}
+@keyframes intro-arrive {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The tabletop. */
+.intro__surface {
+  position: absolute;
+  inset: -3%;
+}
+
+/* Candlelight: two soft pools of warm light that flicker slowly and out of step. */
+.intro__glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  will-change: opacity, transform;
+}
+.intro__glow--a {
+  left: -22%;
+  top: -12%;
+  width: 95vmax;
+  height: 95vmax;
+  background: radial-gradient(closest-side, rgb(var(--eggshell-rgb) / 0.95), rgb(var(--eggshell-rgb) / 0.35) 45%, rgb(var(--eggshell-rgb) / 0) 72%);
+  animation: flicker-a 9.5s var(--ease-in-out) infinite;
+}
+.intro__glow--b {
+  right: -30%;
+  bottom: -18%;
+  width: 80vmax;
+  height: 80vmax;
+  background: radial-gradient(closest-side, rgb(var(--eggshell-rgb) / 0.8), rgb(var(--eggshell-rgb) / 0.3) 45%, rgb(var(--eggshell-rgb) / 0) 72%);
+  animation: flicker-b 13s var(--ease-in-out) infinite;
+}
+@keyframes flicker-a {
+  0%, 100% { opacity: 0.78; transform: scale(1); }
+  9% { opacity: 0.9; }
+  17% { opacity: 0.7; transform: scale(1.02); }
+  31% { opacity: 0.94; }
+  38% { opacity: 0.8; }
+  52% { opacity: 0.66; transform: scale(0.985); }
+  63% { opacity: 0.92; }
+  71% { opacity: 0.76; transform: scale(1.015); }
+  86% { opacity: 0.88; }
+}
+@keyframes flicker-b {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  12% { opacity: 0.78; }
+  23% { opacity: 0.5; transform: scale(0.98); }
+  41% { opacity: 0.82; transform: scale(1.02); }
+  57% { opacity: 0.58; }
+  68% { opacity: 0.74; }
+  83% { opacity: 0.48; transform: scale(0.99); }
+}
+.intro__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 85% 75% at 50% 46%, rgb(var(--ink-rgb) / 0) 38%, rgb(var(--ink-rgb) / 0.2) 72%, rgb(var(--ink-rgb) / 0.46) 100%);
+}
+
+/* ── The suite ────────────────────────────────────────────────────────── */
+
+.suite {
+  position: relative;
+  display: block;
+  width: min(70vw, 25rem, calc((100svh - 12.5rem) * 0.714));
+  margin-top: -1.5rem;
+  container-type: inline-size;
+  rotate: -2.5deg;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.suite:disabled {
+  cursor: default;
+}
+.suite:focus-visible {
+  outline-offset: 14px;
+}
+.suite__breath {
+  position: relative;
+  display: block;
+  animation: breathe 7s var(--ease-in-out) infinite alternate;
+}
+.intro:not(.is-idle) .suite__breath {
+  animation-play-state: paused;
+}
+@keyframes breathe {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.016);
+  }
+}
+.suite__card {
+  display: block;
+  /* three stacked shadows: contact, near and ambient */
+  filter: drop-shadow(0 1px 1px rgb(var(--ink-rgb) / 0.22)) drop-shadow(0 8px 12px rgb(var(--ink-rgb) / 0.18))
+    drop-shadow(0 28px 40px rgb(var(--ink-rgb) / 0.22));
+  will-change: transform, filter;
+}
+.suite__oval,
+.suite__oval-shadow {
+  position: absolute;
+  left: 16%;
+  top: 50%;
+  width: 68%;
+  aspect-ratio: 3 / 4;
+  translate: 0 -50%;
+}
+.suite__oval {
+  filter: drop-shadow(0 1px 1px rgb(var(--ink-rgb) / 0.2));
+  will-change: transform;
+}
+.suite__oval > .art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto !important;
+}
+.suite__oval-shadow {
+  border-radius: 50%;
+  background: rgb(var(--ink-rgb) / 0.55);
+  filter: blur(9px);
+  opacity: 0.4;
+  transform: translateY(3.5%) scale(0.97);
+  will-change: transform, opacity;
+}
+.suite__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15%;
+  color: var(--ink);
+}
+.suite__kicker {
+  font-weight: 400;
+  font-size: max(0.4375rem, 2.7cqw);
+  letter-spacing: 0.32em;
+  margin-right: -0.32em;
+  text-transform: uppercase;
+}
+.suite__names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5.5cqw;
+  font-family: var(--font-script);
+  font-size: 15.5cqw;
+  line-height: 0.92;
+  color: var(--moss);
+}
+.suite__amp {
+  font-size: 0.5em;
+  line-height: 1.25;
+}
+
+/* Ribbon: band → tails → bow, as in the reference. */
+.suite__ribbon {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  rotate: -5deg;
+  filter: drop-shadow(0 2px 2px rgb(var(--ink-rgb) / 0.2)) drop-shadow(0 9px 12px rgb(var(--ink-rgb) / 0.18));
+  will-change: transform, opacity;
+}
+.ribbon__layers {
+  position: absolute;
+  inset: 0;
+}
+.ribbon__band {
+  position: absolute;
+  left: -8%;
+  top: 65.5%;
+  width: 116%;
+  will-change: transform, filter;
+}
+/* the same strip twice, each showing one half, so the halves can part */
+.ribbon__band--left {
+  clip-path: inset(-20% 49.5% -20% -5%);
+}
+.ribbon__band--right {
+  clip-path: inset(-20% -5% -20% 49.5%);
+}
+.ribbon__tail {
+  position: absolute;
+  top: 70%;
+  width: 19%;
+  transform-origin: 50% 0;
+  will-change: transform, filter;
+}
+.ribbon__tail--left {
+  left: 30%;
+  rotate: 17deg;
+}
+.ribbon__tail--right {
+  left: 51%;
+  rotate: -15deg;
+}
+.ribbon__knot {
+  position: absolute;
+  left: 27%;
+  top: 61.5%;
+  width: 46%;
+  will-change: transform, opacity, filter;
+}
+.ribbon__film {
+  position: absolute;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0;
+}
+
+.suite__floral {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 4px rgb(var(--ink-rgb) / 0.2)) drop-shadow(0 14px 18px rgb(var(--ink-rgb) / 0.18));
+  will-change: transform, opacity;
+}
+.suite__floral--hydrangea {
+  left: -20%;
+  bottom: -9%;
+  width: 52%;
+  --sway-dur: 9s;
+  --sway-amt: 0.7deg;
+  --sway-origin: 30% 80%;
+}
+.suite__floral--amaranthus {
+  left: 9%;
+  top: 80%;
+  width: 16%;
+  rotate: 14deg;
+  --sway-dur: 7s;
+  --sway-amt: 1deg;
+  --sway-origin: 50% 0%;
+}
+
+/* ── Prompt, skip, bloom ──────────────────────────────────────────────── */
+
+.intro__prompt {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(2.6rem, env(safe-area-inset-bottom) + 1.6rem);
+  text-align: center;
+  pointer-events: none;
+}
+.intro__prompt span {
+  display: inline-block;
+  animation: prompt 3.2s var(--ease-in-out) infinite alternate;
+}
+@keyframes prompt {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.intro__legend {
+  position: absolute;
+  left: var(--gutter);
+  top: max(1.3rem, env(safe-area-inset-top));
+  max-width: 60%;
+  font-size: 0.5625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.intro__skip {
+  position: absolute;
+  top: max(1rem, env(safe-area-inset-top));
+  right: var(--gutter);
+  z-index: 3;
+  font-size: 0.625rem;
+  transition: color 900ms var(--ease-out);
+}
+
+.intro__bloom {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  /* the cream of the oval card, with paper grain */
+  background-color: #f1ece1;
+  background-image: linear-gradient(rgb(241 236 225 / 0.5), rgb(241 236 225 / 0.5)), var(--grain);
+  background-size: auto, var(--grain-size);
+  background-blend-mode: normal, multiply;
+  will-change: clip-path, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suite__breath,
+  .intro__glow,
+  .intro__prompt span {
+    animation: none;
+  }
+}
