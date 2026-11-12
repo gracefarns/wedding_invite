@@ -124,7 +124,9 @@ scripts/
 - **Reduced motion**: with the system setting on, the intro is skipped for a still monogram,
   smooth scrolling is off, and reveals are simple fades.
 - **Fonts** are self-hosted through `@fontsource` (Monsieur La Doulaise, Cormorant Garamond, Jost)
-  with `font-display: swap`. To try a different script face, change `--font-script` in `tokens.css`.
+  with `font-display: swap`. To try a different script face (Pinyon Script, say): run
+  `npm i @fontsource/pinyon-script`, swap the Monsieur import in `src/main.tsx` for
+  `@fontsource/pinyon-script/latin-400.css`, and change `--font-script` in `tokens.css`.
 
 ### Optional: the ribbon video
 
