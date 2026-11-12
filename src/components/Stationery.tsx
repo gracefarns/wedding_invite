@@ -22,7 +22,7 @@ export function Stationery({ children, className, to, href, tab = true, tilt = -
   const inner = (
     <>
       <span className="stationery__paper" aria-hidden="true">
-        <ArtImage slot="deckleCard" fill natural={false} quiet sizes="(min-width: 640px) 280px, 50vw" />
+        <ArtImage slot="deckleCard" fill natural={false} quiet sizes="(min-width: 640px) 240px, 44vw" />
       </span>
       {tab && (
         <span className="stationery__tab" aria-hidden="true" style={{ ['--tab-tilt' as string]: `${tilt}deg` }}>

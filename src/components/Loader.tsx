@@ -16,7 +16,8 @@ type Props = {
 /** The monogram over a thin progress hairline. Holds until fonts and key images are ready. */
 export function Loader({ slots, onDone }: Props) {
   const [progress, setProgress] = useState(0)
-  const [fontsReady, setFontsReady] = useState(false)
+  // already true when index.html's own loader has shown the monogram, so it never re-fades
+  const [fontsReady, setFontsReady] = useState(() => [...document.fonts].some((f) => f.family.includes('Monsieur') && f.status === 'loaded'))
   const [leaving, setLeaving] = useState(false)
   const [gone, setGone] = useState(false)
 

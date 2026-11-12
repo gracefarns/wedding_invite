@@ -6,3 +6,5 @@ dist
 public/images/_gen
 src/content/images.generated.json
 *.tsbuildinfo
+# output of npm run screenshots
+/screenshots

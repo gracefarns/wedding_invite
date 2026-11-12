@@ -162,9 +162,17 @@
 .wash .art--missing {
   display: none;
 }
-/* stretch rather than crop, so the whole wash (and its ragged edge) always fits */
-.wash .art img {
-  object-fit: fill !important;
+/* on wide screens, stretch rather than crop, so the wash's ragged edge always fits */
+@media (min-aspect-ratio: 1/1) {
+  .wash .art img {
+    object-fit: fill !important;
+  }
+}
+.wash__tail .art img {
+  object-position: 50% 0;
+}
+.wash__lead .art img {
+  object-position: 50% 0;
 }
 
 /* ── Invitation ───────────────────────────────────────────────────────── */

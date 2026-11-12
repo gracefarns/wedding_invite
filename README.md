@@ -24,7 +24,7 @@ Then open the address it prints (usually `http://localhost:5173`).
 | `npm run dev` | Local site with live reload. Placeholders are labelled with the file they want. |
 | `npm run build` | Optimises images, type-checks and builds to `dist/`. |
 | `npm run preview` | Serves the built site locally. |
-| `npm run screenshots` | Captures the intro sequence and every page at 390×844 and 1440×900 (needs the dev server running). |
+| `npm run screenshots` | Captures the intro sequence and every page at 390×844 and 1440×900 into `screenshots/` (needs the dev server running). |
 | `node scripts/contrast.mjs` | Checks every text and background pairing against WCAG AA. |
 
 ## Three things you will want to do
@@ -124,7 +124,9 @@ scripts/
 - **Reduced motion**: with the system setting on, the intro is skipped for a still monogram,
   smooth scrolling is off, and reveals are simple fades.
 - **Fonts** are self-hosted through `@fontsource` (Monsieur La Doulaise, Cormorant Garamond, Jost)
-  with `font-display: swap`. To try a different script face, change `--font-script` in `tokens.css`.
+  with `font-display: swap`. To try a different script face (Pinyon Script, say): run
+  `npm i @fontsource/pinyon-script`, swap the Monsieur import in `src/main.tsx` for
+  `@fontsource/pinyon-script/latin-400.css`, and change `--font-script` in `tokens.css`.
 
 ### Optional: the ribbon video
 

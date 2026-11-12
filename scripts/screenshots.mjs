@@ -18,7 +18,7 @@ try {
 }
 
 const base = (process.argv[2] || 'http://localhost:5173').replace(/\/$/, '')
-const out = process.argv[3] || 'docs/screenshots'
+const out = process.argv[3] || 'screenshots'
 const only = process.argv[4]
 const sizes = [
   { name: 'mobile', width: 390, height: 844 },
