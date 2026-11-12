@@ -4,6 +4,26 @@ import { copyFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 // @ts-expect-error plain ESM script, no types
 import { buildImages } from './scripts/images.mjs'
+import { site } from './src/content/site.config'
+
+const base = process.env.BASE_PATH || '/'
+const escapeHtml = (text: string) => text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+
+/** Fills the page title, description and share image from site.config.ts. */
+function siteMeta(): Plugin {
+  return {
+    name: 'wedding:meta',
+    transformIndexHtml(html) {
+      // Link previews need an absolute image URL; set meta.url once the site has an address.
+      const origin = site.meta.url.replace(/\/$/, '')
+      const image = origin ? `${origin}/images/og.jpg` : `${base}images/og.jpg`
+      return html
+        .replaceAll('__TITLE__', escapeHtml(site.meta.title))
+        .replaceAll('__DESCRIPTION__', escapeHtml(site.meta.description))
+        .replaceAll('__OG_IMAGE__', image)
+    },
+  }
+}
 
 /** Re-runs the image optimiser whenever a file is added to or changed in public/images. */
 function imageWatcher(): Plugin {
@@ -39,7 +59,7 @@ function spaFallback(): Plugin {
 
 export default defineConfig({
   // GitHub Pages project sites live under /<repo>/. The workflow sets BASE_PATH; Vercel uses '/'.
-  base: process.env.BASE_PATH || '/',
-  plugins: [react(), imageWatcher(), spaFallback()],
+  base,
+  plugins: [react(), siteMeta(), imageWatcher(), spaFallback()],
   build: { target: 'es2020' },
 })

@@ -5,7 +5,8 @@
   --olive: #9b9879;
   --moss: #6a6a53;
   --mahogany: #4d342d;
-  /* A deepened moss for body text: 7.6:1 on eggshell, 6:1 on linen (see scripts/contrast.mjs). */
+  /* A deepened moss for body text: 7.3:1 on eggshell, 5.7:1 on linen (see scripts/contrast.mjs).
+     Moss itself is 4.49:1 on eggshell, so it is kept for large type only. */
   --ink: #4a4a3a;
 
   --eggshell-rgb: 237 231 219;

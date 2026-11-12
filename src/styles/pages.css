@@ -74,7 +74,6 @@
   padding-bottom: 0;
 }
 .details__label {
-  color: var(--moss);
   margin-bottom: 1.6rem;
 }
 .details__weekday {
@@ -266,7 +265,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0 0.8em;
-  color: var(--moss);
   font-size: 0.625rem;
 }
 .events__step--left .events__when {
@@ -473,9 +471,6 @@
   display: grid;
   gap: 0.3rem;
   text-align: center;
-}
-.ways dt {
-  color: var(--moss);
 }
 .travel__map {
   margin-top: 2.6rem;
