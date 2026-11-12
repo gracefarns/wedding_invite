@@ -1,0 +1,59 @@
+/* Palette from design-reference/colors.jpeg. No other hues are used anywhere. */
+:root {
+  --eggshell: #ede7db;
+  --linen: #ddccb7;
+  --olive: #9b9879;
+  --moss: #6a6a53;
+  --mahogany: #4d342d;
+  /* A deepened moss for body text: 7.6:1 on eggshell, 6:1 on linen (see scripts/contrast.mjs). */
+  --ink: #4a4a3a;
+
+  --eggshell-rgb: 237 231 219;
+  --linen-rgb: 221 204 183;
+  --olive-rgb: 155 152 121;
+  --moss-rgb: 106 106 83;
+  --mahogany-rgb: 77 52 45;
+  --ink-rgb: 74 74 58;
+
+  --font-script: 'Monsieur La Doulaise', 'Snell Roundhand', 'Apple Chancery', cursive;
+  --font-serif: 'Cormorant Garamond', 'Cormorant Fallback', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Jost', 'Jost Fallback', 'Century Gothic', system-ui, sans-serif;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* The invitation column. */
+  --col: 34rem;
+  --gutter: clamp(1.25rem, 6vw, 2.5rem);
+  --nav-h: 4rem;
+
+  /* Paper shadows: always stacked, never a single hard drop. */
+  --shadow-paper: 0 1px 1px rgb(var(--ink-rgb) / 0.08), 0 4px 10px rgb(var(--ink-rgb) / 0.08),
+    0 18px 38px rgb(var(--ink-rgb) / 0.1);
+  --shadow-paper-low: 0 1px 1px rgb(var(--ink-rgb) / 0.07), 0 3px 8px rgb(var(--ink-rgb) / 0.06),
+    0 10px 22px rgb(var(--ink-rgb) / 0.06);
+  --shadow-cutout: drop-shadow(0 1px 1px rgb(var(--ink-rgb) / 0.16)) drop-shadow(0 6px 10px rgb(var(--ink-rgb) / 0.14))
+    drop-shadow(0 20px 30px rgb(var(--ink-rgb) / 0.14));
+
+  /* Set at runtime to the paper grain texture (public/images/paper/grain.png). */
+  --grain: none;
+  --grain-size: 320px;
+}
+
+/* Metric-matched fallbacks keep text from jumping when the web fonts swap in. */
+@font-face {
+  font-family: 'Jost Fallback';
+  src: local('Arial'), local('Helvetica');
+  size-adjust: 97%;
+  ascent-override: 107%;
+  descent-override: 37%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Cormorant Fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 86%;
+  ascent-override: 107%;
+  descent-override: 33%;
+  line-gap-override: 0%;
+}

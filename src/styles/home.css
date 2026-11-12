@@ -1,0 +1,537 @@
+/* ── Hero: full-bleed photograph, monogram in a wreath, date, scroll cue ── */
+
+.home-top {
+  position: relative;
+}
+.hero {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 34rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--eggshell);
+  background: var(--eggshell);
+}
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  will-change: transform, opacity, filter;
+}
+.hero__img--wide {
+  display: none;
+}
+@media (min-aspect-ratio: 1/1) {
+  .hero__img--wide {
+    display: block;
+  }
+  .hero__img--tall {
+    display: none;
+  }
+}
+/* light fog over the photograph, so the monogram always reads */
+.hero__fog {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 52%, rgb(var(--ink-rgb) / 0.3), rgb(var(--ink-rgb) / 0) 75%),
+    linear-gradient(rgb(var(--eggshell-rgb) / 0.22), rgb(var(--moss-rgb) / 0.3) 55%, rgb(var(--ink-rgb) / 0.42));
+}
+.hero__center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4svh;
+  will-change: transform, opacity;
+}
+.hero__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(68vw, 21rem);
+  aspect-ratio: 1;
+}
+.hero__wreath {
+  position: absolute;
+  inset: 0;
+}
+.hero__monogram {
+  position: relative;
+  font-size: clamp(4.2rem, 21vw, 6.6rem);
+  text-shadow: 0 1px 18px rgb(var(--ink-rgb) / 0.3);
+}
+.hero__date {
+  margin-top: 1.4rem;
+  text-shadow: 0 1px 12px rgb(var(--ink-rgb) / 0.4);
+}
+.hero__scroll {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(1.6rem, env(safe-area-inset-bottom) + 1rem);
+}
+.hero__cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+.hero__scroll .caps {
+  font-size: 0.625rem;
+}
+.hero__line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 2.75rem;
+  overflow: hidden;
+  background: rgb(var(--eggshell-rgb) / 0.28);
+}
+.hero__line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--eggshell);
+  animation: scroll-line 2.8s var(--ease-in-out) infinite;
+}
+@keyframes scroll-line {
+  0% {
+    transform: translateY(-101%);
+  }
+  55%,
+  100% {
+    transform: translateY(101%);
+  }
+}
+/* waiting for the intro: hidden. still (intro skipped or not played): a simple fade. */
+.hero--waiting .hero__fx {
+  opacity: 0;
+}
+.hero--still .hero__fx {
+  animation: hero-fade 1400ms var(--ease-out) both;
+}
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ── Wash: olive watercolour rises over the photograph, then dissolves to paper ── */
+
+.wash {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+.wash__lead,
+.wash__tail {
+  position: relative;
+  overflow: hidden;
+}
+.wash__lead {
+  height: 78svh;
+  background: linear-gradient(rgb(var(--moss-rgb) / 0), rgb(var(--moss-rgb) / 0.55) 45%, var(--moss) 86%);
+}
+.wash__lead .art {
+  transform-origin: 50% 100%;
+  scale: 1 -1.12;
+}
+.wash__tail {
+  height: 62svh;
+  background-color: var(--eggshell);
+  background-image:
+    linear-gradient(var(--moss) 0%, rgb(var(--moss-rgb) / 0.4) 26%, rgb(var(--moss-rgb) / 0) 52%),
+    linear-gradient(rgb(var(--eggshell-rgb) / 0.45), rgb(var(--eggshell-rgb) / 0.45)),
+    var(--grain);
+  background-size: auto, auto, var(--grain-size);
+  background-blend-mode: normal, normal, multiply;
+}
+.wash__tail .art {
+  transform-origin: 50% 0;
+  scale: 1 1.12;
+}
+.wash .art--missing {
+  display: none;
+}
+
+/* ── Invitation ───────────────────────────────────────────────────────── */
+
+.invite {
+  position: relative;
+  z-index: 2;
+  margin-top: -20svh;
+  padding: 0 0 clamp(4.5rem, 16vw, 7rem);
+}
+.invite__kicker {
+  line-height: 2.4;
+}
+.invite__names {
+  margin: clamp(2.4rem, 11vw, 4rem) 0 clamp(2.2rem, 10vw, 3.6rem);
+  font-size: clamp(3.9rem, 18vw, 8.5rem);
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--moss);
+}
+.invite__names .reveal {
+  display: inline-block;
+  padding: 0.1em 0.14em;
+  transition-duration: 1400ms, 1600ms, 2400ms, 1400ms;
+}
+.invite__when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem 0.9rem;
+  padding: 0 var(--gutter);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  letter-spacing: 0.06em;
+}
+.invite__bar {
+  width: 1px;
+  height: 1.05em;
+  background: var(--ink);
+}
+.invite__where {
+  margin-top: 0.4rem;
+  font-size: 0.9375rem;
+  letter-spacing: 0.08em;
+}
+.home__floral {
+  display: none;
+  position: absolute;
+  top: -8rem;
+  width: clamp(14rem, 25vw, 24rem);
+  pointer-events: none;
+  filter: var(--shadow-cutout);
+}
+.home__floral--left {
+  left: -3vw;
+  --sway-origin: 0% 100%;
+  --sway-dur: 9s;
+}
+.home__floral--right {
+  right: -3vw;
+  top: 2rem;
+  --sway-origin: 100% 100%;
+  --sway-dur: 7.5s;
+  --sway-amt: 0.6deg;
+}
+@media (min-width: 68rem) {
+  .home__floral {
+    display: block;
+  }
+}
+
+/* ── Portrait in the embossed oval frame ──────────────────────────────── */
+
+.portrait {
+  padding: clamp(2.8rem, 11vw, 5rem) 0 clamp(3rem, 12vw, 5.5rem);
+}
+.portrait__inner {
+  width: min(100% - 1.5rem, 30rem);
+  margin: 0 auto;
+}
+.oval-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  /* where the frame's opening sits; tune to match your frame image */
+  --window-x: 19%;
+  --window-y: 16%;
+}
+.oval-portrait__window {
+  position: absolute;
+  inset: var(--window-y) var(--window-x);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgb(var(--ink-rgb) / 0.3);
+}
+.oval-portrait__photo {
+  position: absolute;
+  inset: -7% 0;
+  /* colour photographs are welcome: they are shown black-and-white */
+  filter: grayscale(1) contrast(1.05) brightness(1.02);
+  will-change: transform;
+}
+.oval-portrait__frame {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.oval-portrait__frame .art {
+  height: 100%;
+}
+.oval-portrait__frame .art__label {
+  align-self: end;
+  margin-bottom: 3%;
+}
+.oval-portrait__caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.4rem;
+  text-align: center;
+  font-size: 0.625rem;
+}
+/* no frame image yet: the photograph sits in a plain oval paper mat */
+.oval-portrait--bare {
+  --window-x: 7%;
+  --window-y: 6%;
+  width: 82%;
+  margin: 0 auto 2.4rem;
+  border-radius: 50%;
+  box-shadow: var(--shadow-paper);
+}
+.oval-portrait--bare::after {
+  content: '';
+  position: absolute;
+  inset: 3.2%;
+  border: 1px solid rgb(var(--olive-rgb) / 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.oval-portrait--bare .oval-portrait__caption {
+  bottom: -2.6rem;
+}
+
+/* ── Countdown: an oval card tied with ribbon, on a plate, on the toile napkin ── */
+
+.countdown {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(4.2rem, 17vw, 7rem) 0 clamp(5rem, 20vw, 8rem);
+  background: var(--moss);
+}
+.countdown__band {
+  position: absolute;
+  inset: 0;
+}
+/* the plate's gold rim, restated as a thin olive hairline */
+.countdown__rim {
+  position: absolute;
+  inset: 0.7rem;
+  border: 1px solid rgb(var(--olive-rgb) / 0.9);
+  box-shadow: inset 0 0 0 3px rgb(var(--eggshell-rgb) / 0.08);
+  pointer-events: none;
+}
+.countdown__setting {
+  position: relative;
+  width: min(74vw, 20.5rem);
+  margin: 0 auto;
+}
+.countdown__plate {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 148%;
+  translate: -50% -50%;
+  filter: var(--shadow-cutout);
+}
+.countdown__card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  container-type: inline-size;
+}
+.countdown__paper {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 1px 1px rgb(var(--ink-rgb) / 0.3)) drop-shadow(0 8px 14px rgb(var(--ink-rgb) / 0.26))
+    drop-shadow(0 26px 40px rgb(var(--ink-rgb) / 0.3));
+}
+.countdown__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15%;
+  text-align: center;
+}
+.countdown__text .caps {
+  font-size: max(0.5625rem, 3.1cqw);
+}
+.countdown__script {
+  font-size: 17cqw;
+  line-height: 1;
+  margin-top: -1cqw;
+}
+.countdown__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 78%;
+  margin-top: 2.5cqw;
+}
+.countdown__cell dd {
+  font-size: 10.5cqw;
+  font-weight: 400;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.countdown__cell dt {
+  font-size: max(0.5rem, 2.5cqw) !important;
+  letter-spacing: 0.22em;
+  margin-right: -0.22em;
+}
+.countdown__done {
+  margin-top: 6cqw;
+  font-size: 9cqw;
+}
+.countdown__candle {
+  display: none;
+  position: absolute;
+  bottom: -1rem;
+  width: clamp(3rem, 6vw, 4.5rem);
+  filter: var(--shadow-cutout);
+}
+.countdown__candle--left {
+  left: max(6vw, calc(50% - 24rem));
+}
+.countdown__candle--right {
+  right: max(6vw, calc(50% - 24rem));
+  bottom: -3.5rem;
+}
+/* candlelight: a soft pool of light at the flame, flickering slowly */
+.countdown__flame {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 22rem;
+  height: 22rem;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--eggshell-rgb) / 0.75), rgb(var(--eggshell-rgb) / 0.22) 42%, rgb(var(--eggshell-rgb) / 0) 70%);
+  mix-blend-mode: soft-light;
+  animation: flicker-a 8.5s var(--ease-in-out) infinite;
+}
+.countdown__candle--right .countdown__flame {
+  animation: flicker-b 11s var(--ease-in-out) infinite;
+}
+.countdown__candle .art--missing + .countdown__flame {
+  display: none;
+}
+@media (min-width: 48rem) {
+  .countdown__candle {
+    display: block;
+  }
+}
+
+/* A tied ribbon across a card (static). */
+.tie {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  rotate: -4deg;
+  filter: drop-shadow(0 2px 2px rgb(var(--ink-rgb) / 0.22)) drop-shadow(0 9px 12px rgb(var(--ink-rgb) / 0.2));
+}
+.tie__band {
+  position: absolute;
+  left: -10%;
+  top: 69.5%;
+  width: 120%;
+}
+.tie__tail {
+  position: absolute;
+  top: 74%;
+  width: 21%;
+  transform-origin: 50% 0;
+}
+.tie__tail--left {
+  left: 27%;
+  rotate: 17deg;
+}
+.tie__tail--right {
+  left: 52%;
+  rotate: -15deg;
+}
+.tie__knot {
+  position: absolute;
+  left: 25%;
+  top: 64.5%;
+  width: 50%;
+}
+
+/* ── Call to action ───────────────────────────────────────────────────── */
+
+.cta {
+  position: relative;
+}
+.cta__title {
+  font-size: clamp(3.3rem, 15.5vw, 5.25rem);
+  white-space: nowrap;
+  margin-bottom: 0.6rem;
+}
+.cta__text {
+  margin: 1.9rem 0 2.4rem;
+  text-wrap: balance;
+}
+.cta__floral {
+  position: absolute;
+  right: -1.5rem;
+  top: 1.5rem;
+  width: 5.5rem;
+  rotate: 18deg;
+  filter: var(--shadow-cutout);
+  --sway-origin: 50% 50%;
+}
+.cta__floral:empty {
+  display: none;
+}
+
+/* ── Quick links: deckled cards with a ribbon tab ─────────────────────── */
+
+.quick {
+  padding-top: 0;
+}
+.quick__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.6rem, 6vw, 2.4rem) clamp(1rem, 4.5vw, 1.8rem);
+  width: min(100% - 2 * var(--gutter), 46rem);
+  margin: 0 auto;
+}
+.quick__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  aspect-ratio: 4 / 5;
+  padding: 1.5rem 0.75rem 1rem;
+  text-align: center;
+}
+.quick__kicker {
+  font-size: 0.5625rem;
+  letter-spacing: 0.26em;
+  margin-right: -0.26em;
+}
+.quick__title {
+  font-size: clamp(1.45rem, 6.4vw, 1.9rem);
+}
+.quick__card::after {
+  content: '';
+  width: 1.6rem;
+  height: 1px;
+  margin-top: 0.5rem;
+  background: var(--olive);
+  transition: width 900ms var(--ease-out);
+}
+.quick__card:hover::after {
+  width: 3rem;
+}
+@media (min-width: 44rem) {
+  .quick__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__line::after,
+  .countdown__flame {
+    animation: none;
+  }
+}
