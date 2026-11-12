@@ -38,7 +38,7 @@ export function OvalPortrait({ caption }: { caption?: string }) {
         </div>
       </div>
       <div className="oval-portrait__frame" aria-hidden="true">
-        <ArtImage slot="embossedOvalFrame" natural={false} sizes="(min-width: 640px) 560px, 100vw" />
+        <ArtImage slot="embossedOvalFrame" natural={false} quiet sizes="(min-width: 640px) 560px, 100vw" />
       </div>
       {caption && <figcaption className="caps oval-portrait__caption">{caption}</figcaption>}
     </figure>

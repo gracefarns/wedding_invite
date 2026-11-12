@@ -45,6 +45,6 @@ export function scrollToTop(immediate = true) {
 }
 
 export function scrollToElement(el: Element) {
-  if (lenis) lenis.scrollTo(el as HTMLElement, { offset: -72 })
+  if (lenis) lenis.scrollTo(el as HTMLElement, { offset: -104 })
   else el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' })
 }

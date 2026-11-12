@@ -65,6 +65,7 @@ for (const size of sizes) {
   }
 
   // ── Pages (intro already seen in this session) ──────────────────────────
+  await context.addInitScript(() => sessionStorage.setItem('cc-intro-seen', '1'))
   for (const [name, path] of pages) {
     if (only && only !== name) continue
     await page.goto(base + path)
@@ -76,8 +77,18 @@ for (const size of sizes) {
       await page.evaluate((top) => window.scrollTo(0, top), y)
       await page.waitForTimeout(260)
     }
+    // back to the top so scroll-linked pieces rest in their opening state
+    await page.evaluate(() => window.scrollTo(0, 0))
     await page.waitForTimeout(1500)
     await page.screenshot({ path: `${out}/${name}-${size.name}.png`, fullPage: true })
+    if (name === 'home') {
+      // the hand-off: the wash rising over the hero, then dissolving into the invitation
+      for (const [label, f] of [['wash-1', 0.55], ['wash-2', 1.25], ['wash-3', 1.75]]) {
+        await page.evaluate((top) => window.scrollTo(0, top), Math.round(size.height * f))
+        await page.waitForTimeout(1300)
+        await page.screenshot({ path: `${out}/home-${size.name}-${label}.png` })
+      }
+    }
   }
   await context.close()
 }

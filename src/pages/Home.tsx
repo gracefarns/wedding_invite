@@ -96,8 +96,8 @@ function Wash() {
     if (reduced || !root.current) return
     const ctx = gsap.context(() => {
       const st = { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: true }
-      gsap.fromTo('.wash__lead .art', { yPercent: 6 }, { yPercent: -4, ease: 'none', scrollTrigger: st })
-      gsap.fromTo('.wash__tail .art', { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: st })
+      gsap.fromTo('.wash__lead .art', { yPercent: 4 }, { yPercent: -4, ease: 'none', scrollTrigger: st })
+      gsap.fromTo('.wash__tail .art', { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: st })
     }, root)
     return () => ctx.revert()
   }, [reduced])
@@ -160,7 +160,7 @@ export default function Home() {
 
       <section className="countdown" aria-label="Countdown to the wedding">
         <div className="countdown__band" aria-hidden="true">
-          <ArtImage slot="toileNapkin" fill sizes="100vw" />
+          <ArtImage slot="toileNapkin" fill sizes="100vw" labelAt="top" />
         </div>
         <div className="countdown__rim" aria-hidden="true" />
         <div className="countdown__candle countdown__candle--left" aria-hidden="true">
@@ -173,7 +173,7 @@ export default function Home() {
         </div>
         <Reveal variant="soft" className="countdown__setting">
           <div className="countdown__plate" aria-hidden="true">
-            <ArtImage slot="goldRimPlate" sizes="(min-width: 640px) 520px, 100vw" />
+            <ArtImage slot="goldRimPlate" quiet sizes="(min-width: 640px) 520px, 100vw" />
           </div>
           <div className="countdown__card">
             <div className="countdown__paper" aria-hidden="true">

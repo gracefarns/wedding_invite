@@ -133,28 +133,38 @@
 }
 .wash__lead {
   height: 78svh;
-  background: linear-gradient(rgb(var(--moss-rgb) / 0), rgb(var(--moss-rgb) / 0.55) 45%, var(--moss) 86%);
+  background: linear-gradient(rgb(var(--moss-rgb) / 0), rgb(var(--moss-rgb) / 0.5) 42%, var(--moss) 80%);
 }
 .wash__lead .art {
-  transform-origin: 50% 100%;
-  scale: 1 -1.12;
+  transform-origin: 50% 50%;
+  scale: 1 -1.1;
+  /* fades to the solid colour at the seam, so the two halves always meet cleanly */
+  /* (the element is flipped, so its local top is the visual bottom) */
+  -webkit-mask-image: linear-gradient(transparent 16%, #000 52%);
+  mask-image: linear-gradient(transparent 16%, #000 52%);
 }
 .wash__tail {
-  height: 62svh;
+  height: 70svh;
   background-color: var(--eggshell);
   background-image:
-    linear-gradient(var(--moss) 0%, rgb(var(--moss-rgb) / 0.4) 26%, rgb(var(--moss-rgb) / 0) 52%),
+    linear-gradient(var(--moss) 0%, rgb(var(--moss-rgb) / 0.55) 22%, rgb(var(--moss-rgb) / 0) 48%),
     linear-gradient(rgb(var(--eggshell-rgb) / 0.45), rgb(var(--eggshell-rgb) / 0.45)),
     var(--grain);
   background-size: auto, auto, var(--grain-size);
   background-blend-mode: normal, normal, multiply;
 }
 .wash__tail .art {
-  transform-origin: 50% 0;
-  scale: 1 1.12;
+  transform-origin: 50% 50%;
+  scale: 1 1.1;
+  -webkit-mask-image: linear-gradient(transparent 14%, #000 42%);
+  mask-image: linear-gradient(transparent 14%, #000 42%);
 }
 .wash .art--missing {
   display: none;
+}
+/* stretch rather than crop, so the whole wash (and its ragged edge) always fits */
+.wash .art img {
+  object-fit: fill !important;
 }
 
 /* ── Invitation ───────────────────────────────────────────────────────── */
@@ -162,7 +172,7 @@
 .invite {
   position: relative;
   z-index: 2;
-  margin-top: -20svh;
+  margin-top: -9svh;
   padding: 0 0 clamp(4.5rem, 16vw, 7rem);
 }
 .invite__kicker {
@@ -170,7 +180,7 @@
 }
 .invite__names {
   margin: clamp(2.4rem, 11vw, 4rem) 0 clamp(2.2rem, 10vw, 3.6rem);
-  font-size: clamp(3.9rem, 18vw, 8.5rem);
+  font-size: clamp(3.3rem, 15.4vw, 8.5rem);
   line-height: 1.1;
   white-space: nowrap;
   color: var(--moss);
@@ -279,6 +289,9 @@
   font-size: 0.625rem;
 }
 /* no frame image yet: the photograph sits in a plain oval paper mat */
+.oval-portrait--bare .oval-portrait__frame {
+  display: none;
+}
 .oval-portrait--bare {
   --window-x: 7%;
   --window-y: 6%;

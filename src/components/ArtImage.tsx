@@ -53,7 +53,7 @@ export function ArtImage({ slot, image, fill, natural, ratio, sizes, priority, p
     return (
       <span
         className={`${classes} art--missing art--tone-${def.tone ?? 'linen'} art--shape-${def.shape ?? 'rect'}${
-          def.missing === 'hide' ? ' art--ghost' : ''
+          def.missing === 'hide' && !def.tone ? ' art--ghost' : ''
         }`}
         style={{ ...(fill ? null : { aspectRatio: `${rw} / ${rh}` }), ...style }}
         role={def.alt ? 'img' : undefined}

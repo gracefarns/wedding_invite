@@ -235,8 +235,8 @@ export const site = {
   rsvpPage: {
     title: 'Will you join us?',
     intro: 'One reply per household is perfect.',
-    soonTitle: 'RSVP opens soon',
-    soonText: 'We are just finishing the guest list. Please check back shortly, or write to us in the meantime.',
+    soonTitle: 'Opening soon',
+    soonText: 'RSVP opens soon. We are just finishing the guest list, so please check back shortly or write to us in the meantime.',
     successTitle: 'Thank you',
     successAccept: 'Your reply is safely with us. We cannot wait to celebrate with you.',
     successDecline: 'Your reply is safely with us. You will be so missed, and we will raise a glass to you.',

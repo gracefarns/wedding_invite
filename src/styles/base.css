@@ -316,6 +316,8 @@ button {
 }
 /* left-to-right wipe, with room for script flourishes outside the box */
 .reveal--wipe {
+  display: inline-block;
+  opacity: 1;
   transform: none;
   clip-path: inset(-40% 100% -40% -8%);
 }

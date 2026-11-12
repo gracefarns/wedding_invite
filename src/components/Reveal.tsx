@@ -38,12 +38,26 @@ export function Reveal({ children, as = 'div', variant = 'rise', delay = 0, clas
     return () => io.disconnect()
   }, [seen])
 
+  const delayed = delay ? { ['--delay' as string]: `${delay}ms` } : undefined
+
+  // A wipe clips its own box to nothing, which would hide it from the observer, so the
+  // outer element is watched and an inner span carries the clip.
+  if (variant === 'wipe') {
+    return createElement(
+      as,
+      { ref, className, style, ...rest },
+      <span className={`reveal reveal--wipe${seen ? ' is-in' : ''}`} style={delayed}>
+        {children}
+      </span>,
+    )
+  }
+
   return createElement(
     as,
     {
       ref,
       className: ['reveal', variant !== 'rise' && `reveal--${variant}`, seen && 'is-in', className].filter(Boolean).join(' '),
-      style: delay ? { ...style, ['--delay' as string]: `${delay}ms` } : style,
+      style: { ...style, ...delayed },
       ...rest,
     },
     children,

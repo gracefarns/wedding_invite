@@ -24,8 +24,9 @@ export interface ImageSlot {
   shape?: Shape
   /**
    * What a missing image does on the live site (labels only ever show in development or with
-   * ?placeholders=1). 'block' keeps a plain block so the layout holds; 'hide' removes
-   * decorative accents entirely.
+   * ?placeholders=1). 'block' keeps a plain block so the layout holds; 'hide' removes the
+   * piece entirely, which is right for decorative accents and for parts of a composed object
+   * (ribbon, envelope) that would otherwise read as a drawn shape.
    */
   missing?: 'block' | 'hide'
 }
@@ -98,8 +99,8 @@ export const images = {
     tone: 'olive',
     missing: 'hide',
   }),
-  envelopeBack: slot({ file: 'paper/envelope-back.png', alt: '', ratio: [7, 5], hint: 'alpha', tone: 'moss' }),
-  envelopeFront: slot({ file: 'paper/envelope-front.png', alt: '', ratio: [7, 5], hint: 'alpha', tone: 'olive' }),
+  envelopeBack: slot({ file: 'paper/envelope-back.png', alt: '', ratio: [7, 5], hint: 'alpha', tone: 'moss', missing: 'hide' }),
+  envelopeFront: slot({ file: 'paper/envelope-front.png', alt: '', ratio: [7, 5], hint: 'alpha', tone: 'olive', missing: 'hide' }),
   envelopeFlap: slot({
     file: 'paper/envelope-flap.png',
     alt: '',
@@ -107,6 +108,7 @@ export const images = {
     hint: 'alpha',
     tone: 'olive',
     shape: 'flap',
+    missing: 'hide',
   }),
   venueWatercolor: slot({
     file: 'paper/venue-watercolor.jpg',
@@ -116,10 +118,10 @@ export const images = {
   }),
 
   // ── Ribbon ────────────────────────────────────────────────────────────────
-  ribbonKnot: slot({ file: 'ribbon/bow-knot.png', alt: '', ratio: [2, 1], hint: 'alpha', tone: 'moss' }),
-  ribbonTailLeft: slot({ file: 'ribbon/tail-left.png', alt: '', ratio: [1, 2], hint: 'alpha', tone: 'olive' }),
-  ribbonTailRight: slot({ file: 'ribbon/tail-right.png', alt: '', ratio: [1, 2], hint: 'alpha', tone: 'olive' }),
-  ribbonBand: slot({ file: 'ribbon/band.png', alt: '', ratio: [8, 1], hint: 'alpha', tone: 'olive' }),
+  ribbonKnot: slot({ file: 'ribbon/bow-knot.png', alt: '', ratio: [2, 1], hint: 'alpha', tone: 'moss', missing: 'hide' }),
+  ribbonTailLeft: slot({ file: 'ribbon/tail-left.png', alt: '', ratio: [1, 2], hint: 'alpha', tone: 'olive', missing: 'hide' }),
+  ribbonTailRight: slot({ file: 'ribbon/tail-right.png', alt: '', ratio: [1, 2], hint: 'alpha', tone: 'olive', missing: 'hide' }),
+  ribbonBand: slot({ file: 'ribbon/band.png', alt: '', ratio: [8, 1], hint: 'alpha', tone: 'olive', missing: 'hide' }),
   ribbonTab: slot({ file: 'ribbon/tab.png', alt: '', ratio: [1, 2], hint: 'alpha', tone: 'olive', missing: 'hide' }),
 
   // ── Florals ───────────────────────────────────────────────────────────────
